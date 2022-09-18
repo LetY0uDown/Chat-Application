@@ -1,0 +1,58 @@
+﻿<Window x:Class="Chat_Client.Views.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Chat_Client.ViewModels"
+        xmlns:core="clr-namespace:Chat_Client.Core"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="650" Width="1080"
+        WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate x:Key="ChatListItemTemplate" DataType="{x:Type core:Chat}">
+            <Button Content="{Binding Title}"/>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".5*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Background="LightGray" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height=".32*"/>
+                    </Grid.RowDefinitions>
+
+                    <ListView ItemTemplate="{StaticResource ResourceKey=ChatListItemTemplate}"
+                              ItemsSource="{Binding Chats}" Background="Transparent"
+                              SelectedItem="{Binding SelectedChat}"/>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        
+                        <Button Content="Войти в чат" FontSize="28" Margin="5"
+                                Command="{Binding JoinChatCommand}"/>
+
+                        <Button Content="Добавить Чат" FontSize="28" Margin="5"
+                                Command="{Binding CreateChatCommand}" Grid.Row="1"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Frame Grid.Column="1" Content="{Binding CurrentChatPage}"/>
+        </Grid>
+    </Border>
+</Window>
