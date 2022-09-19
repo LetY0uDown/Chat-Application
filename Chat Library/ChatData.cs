@@ -1,36 +1,32 @@
 ﻿using ChatLibrary.Message;
 using ChatLibrary.User;
 using System.Collections.ObjectModel;
+using System.Text.Json.Serialization;
 
 namespace ChatLibrary;
 
 public class ChatData
 {
-    public static ChatData CreateWithAdmin(string title, PublicUserData admin)
+    public ChatData(string title, PublicUserData admin)
     {
-        return new()
-        {
-            Title = title,
+        Title = title;
 
-            ID = Guid.NewGuid(),
+        ID = Guid.NewGuid();
 
-            Messages = new(),
-            Users = new() { admin }
-        };
+        Messages = new();
+        Users = new() { admin };
     }
 
-    public static ChatData CreateNew(Guid id, string title, List<ChatMessage> messages, List<PublicUserData> users)
+    [JsonConstructor]
+    public ChatData(Guid iD, string title, ObservableCollection<ChatMessage> messages, ObservableCollection<PublicUserData> users)
     {
-        return new()
-        {
-            ID = id,
-            Title = title,
-            Messages = new(messages),
-            Users = new(users)
-        };
+        ID = iD;
+        Title = title;
+        Messages = messages;
+        Users = users;
     }
 
-    public Guid ID { get; private init; }
+    public Guid ID { get; private init; }    
 
     public string Title { get; private init; }
 

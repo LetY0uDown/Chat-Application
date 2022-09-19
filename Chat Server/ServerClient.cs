@@ -24,8 +24,6 @@ internal sealed class ServerClient
             {
                 string message = _reader.ReadLine();
 
-                Console.WriteLine("New message");
-
                 MessageHandlerServer.HandleMessage(message, this);
             }
         }

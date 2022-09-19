@@ -16,12 +16,12 @@ internal sealed class Chat
         ID = data.ID;
     }
 
-    internal Guid ID { get; init; }
+    public Guid ID { get; init; }
 
-    internal string Title { get; private set; }
+    public string Title { get; private set; }
 
-    internal ObservableCollection<PublicUserData> Members { get; private set; }
-    internal ObservableCollection<ChatMessage> Messages { get; private set; }
+    public ObservableCollection<PublicUserData> Members { get; private set; }
+    public ObservableCollection<ChatMessage> Messages { get; private set; }
 
     internal void UpdateMessages(ObservableCollection<ChatMessage> messages) => Messages = messages;
 

@@ -17,14 +17,23 @@ public partial class App : Application
 
     internal static void SetCurrentChat(Chat newChat)
     {
+        if (CurrentChat == newChat) return;
+
         if (Current.MainWindow is MainWindow mainWindow)
         {
-            var viewModel = mainWindow.DataContext as MainWindowViewModel;
-            viewModel.CurrentChatPage = new ChatPage(newChat);
-            viewModel.Chats.Add(newChat);
-        }
+            CurrentChat = newChat;
 
-        CurrentChat = newChat;
+            var viewModel = mainWindow.DataContext as MainWindowViewModel;
+
+            mainWindow.ChatPageFrame.Content = new ChatPage()
+            {
+                DataContext = new ChatViewModel(CurrentChat)
+            };
+
+            if (viewModel.Chats.Contains(newChat)) return;
+
+            viewModel.Chats.Add(newChat);
+        }       
     }
 
     internal static void ChangeMainWindow(Window newWindow)

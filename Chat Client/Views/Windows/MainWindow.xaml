@@ -15,7 +15,7 @@
 
     <Window.Resources>
         <DataTemplate x:Key="ChatListItemTemplate" DataType="{x:Type core:Chat}">
-            <Button Content="{Binding Title}"/>
+            <TextBlock Text="{Binding Title}" FontSize="22"/>
         </DataTemplate>
     </Window.Resources>
     
@@ -25,6 +25,9 @@
                 <ColumnDefinition Width=".5*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+
+            <Frame Grid.Column="1" Margin="0 5 5 5" x:Name="ChatPageFrame"
+                   NavigationUIVisibility="Hidden"/>
 
             <Border Background="LightGray" Margin="5">
                 <Grid>
@@ -42,7 +45,7 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        
+
                         <Button Content="Войти в чат" FontSize="28" Margin="5"
                                 Command="{Binding JoinChatCommand}"/>
 
@@ -51,8 +54,6 @@
                     </Grid>
                 </Grid>
             </Border>
-
-            <Frame Grid.Column="1" Content="{Binding CurrentChatPage}"/>
         </Grid>
     </Border>
 </Window>

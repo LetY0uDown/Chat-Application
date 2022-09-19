@@ -9,5 +9,5 @@ public partial class LoginWindow : Window
         InitializeComponent();
     }
 
-    internal string Password => passwordBox.SecurePassword.ToString();
+    internal string Password => passwordBox.Password;
 }

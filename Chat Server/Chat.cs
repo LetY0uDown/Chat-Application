@@ -1,4 +1,5 @@
 ﻿using Chat_Server.Data;
+using Chat_Server.Messages;
 using ChatLibrary;
 using ChatLibrary.Message;
 using ChatLibrary.User;
@@ -28,8 +29,10 @@ internal sealed class Chat
 
     private void SendUpdateRequest(string messageJson)
     {
+        var message = MessageFactory.CreateChatMessage(messageJson);
+
         foreach (var client in _members)
-            client.SendMessageToUser(messageJson);
+            client.SendMessageToUser(message);
     }
     // TODO: Change update method probably
     internal void RecieveMessage(string messageJson)
@@ -56,6 +59,6 @@ internal sealed class Chat
 
     internal ChatData PackData()
     {
-        return ChatData.CreateNew(ID, Title, _messages, _membersData);
+        return new ChatData(ID, Title, new(_messages), new(_membersData));
     }
 }

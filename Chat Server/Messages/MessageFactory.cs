@@ -8,6 +8,13 @@ namespace Chat_Server.Messages;
 
 internal static class MessageFactory
 {
+    internal static string CreateChatMessage(string json)
+    {
+        NetworkMessage message = new(json, NetworkMessage.Type.ChatMessage);
+
+        return JsonSerializer.Serialize(message);
+    }
+
     internal static string CreateErrorMessage(string source, string message)
     {
         ErrorMessage errorMessage = new()

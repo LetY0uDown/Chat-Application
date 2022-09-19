@@ -12,7 +12,7 @@
                        FontSize="26" Width="188"/>
 
             <TextBox FontSize="24" Margin="5" Width="350" VerticalAlignment="Center"
-                     Padding="5" Text="{Binding ChatID}"/>
+                     Padding="5" Text="{Binding ChatID, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Button Content="Войти" FontSize="26" Margin="5"
                     Width="150" Padding="5" Command="{Binding JoinChatCommand}"/>

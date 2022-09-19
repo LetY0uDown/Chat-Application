@@ -14,7 +14,8 @@
                 <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
                     <TextBlock Text="{Binding SenderData.Username}" FontSize="24"
                                FontWeight="DemiBold"/>
-                    <TextBlock Text="{Binding Date}" Foreground="LightGray"/>
+                    <TextBlock Text="{Binding Date}" Foreground="LightGray" VerticalAlignment="Center"
+                               Margin="10 0 0 0"/>
                 </StackPanel>
                 
                 <TextBlock Text="{Binding Text}" FontSize="22"/>
@@ -35,7 +36,8 @@
                 <TextBlock Text="{Binding Data.Title}" FontSize="24" Margin="5 0 0 0"
                            VerticalAlignment="Center"/>
 
-                <TextBlock Text="{Binding Data.ID}" VerticalAlignment="Bottom" Margin="10 0 0 2"/>
+                <TextBox Text="{Binding Data.ID}" VerticalAlignment="Bottom" Margin="10 0 0 2"
+                         IsReadOnly="True"/>
             </StackPanel>
         </Border>
 

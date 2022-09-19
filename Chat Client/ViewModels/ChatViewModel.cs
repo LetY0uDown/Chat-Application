@@ -28,6 +28,8 @@ internal sealed class ChatViewModel : ObservableObject
 
             App.CurrentClient.SendMessageToServer(message);
 
+            MessageText = string.Empty;
+
         }, b => !string.IsNullOrEmpty(MessageText));
 
         DisconnectCommand = new(o =>

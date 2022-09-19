@@ -2,6 +2,7 @@
 using ChatLibrary;
 using ChatLibrary.Message;
 using ChatLibrary.User;
+using System;
 using System.Linq;
 using System.Text.Json;
 using System.Windows;
@@ -34,7 +35,7 @@ internal static class MessageHandler
                     HandleChatList(deserializedMessage.JsonData);
                     break;
 
-                case NetworkMessage.Type.ChatUpdateRequest:
+                case NetworkMessage.Type.ChatMessage:
                     HandleChatUpdate(deserializedMessage.JsonData);
                     break;
 
@@ -97,9 +98,14 @@ internal static class MessageHandler
 
     private static void HandleChatCreation(string jsonData)
     {
-        var response = JsonSerializer.Deserialize<ChatData>(jsonData);
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
-        MessageBox.Show($"Чат {response.Title} был создан.\nID для подключения: {response.ID}", "Чат создан!");
+        ChatData response = JsonSerializer.Deserialize<ChatData>(jsonData, options);
+
+        MessageWindow.Show("Чат создан!", $"Чат {response.Title} был создан.\nID для подключения: {response.ID}");
 
         App.SetCurrentChat(new Chat(response));
     }

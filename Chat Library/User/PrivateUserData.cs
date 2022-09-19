@@ -1,18 +1,17 @@
-﻿namespace ChatLibrary.User;
+﻿using System.Text.Json.Serialization;
+
+namespace ChatLibrary.User;
 
 public class PrivateUserData
 {
-    public PrivateUserData()
-    {
-
-    }
-    public PrivateUserData(Guid id, string username, string password, List<Guid> chats)
+    [JsonConstructor]
+    public PrivateUserData(Guid id, string username, string password, List<Guid> chatIDs)
     {
         ID = id;
         Username = username;
         Password = password;
 
-        ChatIDs = chats;
+        ChatIDs = chatIDs;
     }
 
     public PrivateUserData(Guid id, string username, string password)
